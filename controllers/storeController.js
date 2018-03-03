@@ -11,6 +11,11 @@ exports.addStore = (req, res) => {
 
 exports.createStore = (req, res) => {
 	const store = new Store(req.body);
-	store.save();
-	res.redirect('/');
+	store.save()
+		.then(store => {
+			res.redirect('/');
+		})
+		.catch(err => {
+			throw Error(err);
+		});
 }
