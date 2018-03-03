@@ -9,13 +9,8 @@ exports.addStore = (req, res) => {
 	res.render('add-edit', {title: 'Add Store'});
 }
 
-exports.createStore = (req, res) => {
+exports.createStore = async (req, res) => {
 	const store = new Store(req.body);
-	store.save()
-		.then(store => {
-			res.redirect('/');
-		})
-		.catch(err => {
-			throw Error(err);
-		});
+	await store.save();
+	res.redirect('/');
 }
