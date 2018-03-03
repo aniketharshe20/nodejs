@@ -1,0 +1,22 @@
+mixin storeForm(store = {})
+	form(action="/add" method="POST" class="form-general form-horizontal")
+		div.form-group
+			label(for="name" class="col-sm-2 control-label") StoreName
+			div.col-sm-9
+				input(type="text" name="name" id="name" class="form-control")
+		div.form-group
+			label(for="description" class="col-sm-2 control-label") Description
+			div.col-sm-9
+				textarea(name="description" id="description" class="form-control")
+		div.form-group
+			label(for="tags" class="col-sm-2 control-label") Tags
+			div.col-sm-9
+				- const choices = ['Wifi', 'Open Late', 'Family Friendly', 'Vegatarian', 'Licensed']
+				ul.tags
+					each choice in choices
+						.tag.tag__choice
+							input(type="checkbox" id=choice value=choice name="tags")
+							label(for=choice) #{choice}
+		div.form-group
+			div.col-sm-offset-2.col-sm-9
+				input(type="submit" value="Save →" class="button")
