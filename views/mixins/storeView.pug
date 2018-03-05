@@ -1,0 +1,5 @@
+mixin storeCard(store = {})
+	.store
+	h3.store-name
+		a(href=`/store/${store.slug}`) #{store.name}
+	p.store-details= store.description.substr(0,25)

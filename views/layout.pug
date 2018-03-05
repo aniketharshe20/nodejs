@@ -1,11 +1,21 @@
 doctype html
 html
 	head
-		title= title
+		title= h.siteName
 		link(rel='stylesheet', href='/stylesheets/style.css')
 		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
 	body
 		.wrapper
+			block messages
+				if locals.flashes
+					.inner
+						.flash-messages
+							- const categories = Object.keys(locals.flashes)
+							each category in categories
+								each message in flashes[category]
+									.alert(class=`alert-${category} alert-dismissible`)
+										a(href="javascript:;" class="close" onClick="this.parentElement.remove()") &times;
+										p.flash__text!= message
 			.row
 				.col-xs-12
 					block content
