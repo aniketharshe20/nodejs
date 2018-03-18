@@ -3,6 +3,7 @@ extends layout
 include mixins/storeView
 block content
 	h1= title
+	a(href=`/store/add` class='btn btn-primary') Add
 	.stores
 		each store in stores
 			+storeCard(store)

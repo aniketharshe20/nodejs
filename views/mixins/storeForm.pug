@@ -1,22 +1,26 @@
 mixin storeForm(store = {})
-	form(action="/add" method="POST" class="form-general form-horizontal")
+	- let action = '/store/add'
+	- if (store.id) action = '/store/update/'+store.id
+	form(action=action method="POST" class="form-general form-horizontal")
 		div.form-group
 			label(for="name" class="col-sm-2 control-label") StoreName
 			div.col-sm-9
-				input(type="text" name="name" id="name" class="form-control")
+				input(type="text" name="name" id="name" class="form-control" value=store.name)
 		div.form-group
 			label(for="description" class="col-sm-2 control-label") Description
 			div.col-sm-9
-				textarea(name="description" id="description" class="form-control")
+				textarea(name="description" id="description" class="form-control")= store.description
 		div.form-group
 			label(for="tags" class="col-sm-2 control-label") Tags
 			div.col-sm-9
+				- const tags = store.tags || []
 				- const choices = ['Wifi', 'Open Late', 'Family Friendly', 'Vegatarian', 'Licensed']
 				ul.tags
 					each choice in choices
 						.tag.tag__choice
-							input(type="checkbox" id=choice value=choice name="tags")
+							input(type="checkbox" id=choice value=choice name="tags" checked=(tags.includes(choice)))
 							label(for=choice) #{choice}
 		div.form-group
 			div.col-sm-offset-2.col-sm-9
-				input(type="submit" value="Save →" class="button")
+				input(type="submit" value="Save →" class="btn btn-success")
+				a(href=`/store` class='btn btn-danger btn-mrg-l15') Cancel

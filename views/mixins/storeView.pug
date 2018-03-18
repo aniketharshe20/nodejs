@@ -3,3 +3,6 @@ mixin storeCard(store = {})
 	h3.store-name
 		a(href=`/store/${store.slug}`) #{store.name}
 	p.store-details= store.description.substr(0,25)
+	.store__actions
+		.store__action.store__action--edit
+			a(href=`/store/${store._id}/edit`) Edit
